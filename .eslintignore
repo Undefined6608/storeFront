@@ -1,0 +1,7 @@
+node_modules/
+dist/
+craco.config.js
+codeSecurity.ts
+*.json
+api/proxy.js
+tailwind.config.js
