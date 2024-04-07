@@ -29,5 +29,14 @@ module.exports = {
 				changeOrigin: true
 			}
 		}
+	},
+	style: {
+		sass: {
+			loaderOptions: {
+				sassOptions: {
+					includePaths: [path.resolve(__dirname, 'src/styles')],
+				},
+			}
+		}
 	}
 };

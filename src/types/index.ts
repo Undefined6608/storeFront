@@ -1,3 +1,5 @@
-export interface baseType {
-    count: number;
+export interface navType {
+    id: string;
+    title: string;
+    link: string;
 }

@@ -1,25 +1,29 @@
+import { userInfoType } from "@/types/api/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CounterState } from "../../types/global";
 
-const initialState: CounterState = {
-    value: 0,
+const initialState: userInfoType = {
+    userName: "",
+    email: "",
+    phone: "",
+    gender: false,
+    limitType: 3,
+    avatar: "",
+    integral: 0,
+    balance: 0,
+    likeNum: 0,
+    dontLike: 0,
+    uid: "",
 };
 
 const counterSlice = createSlice({
-    name: "counter",
+    name: "userInfo",
     initialState,
     reducers: {
-        increment: (state) => {
-            state.value += 1;
-        },
-        decrement: (state) => {
-            state.value -= 1;
-        },
-        incrementByAmount: (state, action: PayloadAction<number>) => {
-            state.value += action.payload;
+        setUserInfo: (state, action: PayloadAction<userInfoType>) => {
+            state = action.payload;
         },
     },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { setUserInfo } = counterSlice.actions;
 export default counterSlice.reducer;

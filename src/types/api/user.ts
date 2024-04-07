@@ -1,0 +1,13 @@
+export interface userInfoType {
+    userName: string;
+    email: string;
+    phone: string;
+    gender: boolean;
+    limitType: number;
+    avatar: string;
+    integral: number;
+    balance: number;
+    likeNum: number;
+    dontLike: number;
+    uid: string;
+}

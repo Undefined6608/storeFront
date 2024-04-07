@@ -1,0 +1,21 @@
+.header {
+	width: 100%;
+	height: 72px;
+	padding: 0 30px;
+	box-sizing: border-box;
+	box-shadow: 0 0 5px #ccc;
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: space-between;
+	font-family: "HarmonyOS Sans SC Regular";
+
+	.title{
+		font-size: 2rem;
+		color: black;
+		cursor: pointer;
+		&:hover{
+			color: #aaa;
+		}
+	}
+}
