@@ -1,4 +1,7 @@
-export interface userInfoType {
+export interface LoginResponseType {
+    token: string
+}
+export interface UserInfoType {
     userName: string;
     email: string;
     phone: string;

@@ -1,9 +1,9 @@
-import { navType } from "@/types";
+import { NavType } from "@/types";
 import React from "react";
 import { Link } from "react-router-dom";
 import "@/styles/components/header/navComponent.scss";
 
-export const NavComponent: React.FC<{ navList: navType[] }> = (props) => {
+export const NavComponent: React.FC<{ navList: NavType[] }> = (props) => {
 	return (
 		<div className="nav-component">
 			{

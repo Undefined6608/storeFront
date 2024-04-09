@@ -1,18 +1,23 @@
 import React, { useRef } from "react";
 import "@/styles/components/header.scss";
-import { navType } from "@/types";
+import { NavType } from "@/types";
 import { NavComponent } from "./header/NavComponent";
 import { UserComponent } from "./header/UserComponent";
+import {useNavigate} from "react-router-dom";
+import {UserBtnList} from "@/components/header/UserBtnList";
 export const Header = () => {
-	const navList = useRef<navType[]>([
+	const history = useNavigate();
+	const navList = useRef<NavType[]>([
 		{ id: "nav1", title: "Home", link: "/" },
-		{ id: "nav2", title: "About", link: "/about" }
+		{ id: "nav2", title: "Shop", link: "/shop" },
+		{ id: "nav3", title: "About", link: "/about" },
 	]);
 	return (
 		<div className="header">
-			<div className="title">Store</div>
+			<div className="title" onClick={()=>history("/")}>Store</div>
 			<NavComponent navList={navList.current} />
 			<UserComponent />
+			<UserBtnList/>
 		</div>
 	);
 };

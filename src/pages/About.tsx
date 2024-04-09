@@ -2,8 +2,10 @@ import React from "react";
 
 export const About = () => {
 	return (
-		<div>
-			<h1>About</h1>
-		</div>
+		<>
+			<div className={"container"}>
+				<h1>About</h1>
+			</div>
+		</>
 	);
 };

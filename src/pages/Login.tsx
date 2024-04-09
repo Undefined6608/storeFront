@@ -1,9 +1,13 @@
 import React from "react";
+import "@/styles/pages/login.scss";
+import { LoginForm } from "@/components/LoginForm";
 
 export const Login = () => {
 	return (
-		<div>
-			<h1>Login</h1>
-		</div>
+		<>
+			<div className="container login-container">
+				<LoginForm />
+			</div>
+		</>
 	);
 };
