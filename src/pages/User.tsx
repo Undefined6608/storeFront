@@ -1,7 +1,7 @@
 import React from "react";
 import {useAppSelector} from "@/app/hooks";
 import {fetchUserInfo} from "@/store/reducers/userInfoSlice";
-import "@/styles/pages/user.scss";
+import "./user.module.scss";
 
 export const User:React.FC = () => {
     const userInfo = useAppSelector(fetchUserInfo);
