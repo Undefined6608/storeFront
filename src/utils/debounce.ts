@@ -29,7 +29,7 @@ const useDebounce = <T extends (...args: any[]) => any>(callback: T, delay: numb
 		}, delay);
 		// 清除计时器
 		return () => {
-		clearTimeout(handler);
+			clearTimeout(handler);
 		};
 	}, [memoizedCallback, delay]);
 	// 返回防抖函数

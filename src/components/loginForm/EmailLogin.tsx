@@ -1,75 +1,81 @@
-import React, {useEffect, useState} from "react";
-import { LockOutlined, GlobalOutlined } from "@ant-design/icons";
-import {Button, Form, Input, Checkbox, type GetProp, Flex} from "antd";
+import React, { useEffect, useState } from "react";
+import { LockOutlined, MailOutlined } from "@ant-design/icons";
+import { Button, Form, Input, Checkbox, Flex } from "antd";
 import "@/styles/components/loginForm/loginType.scss";
-import {getImgVerifyCode} from "@/api/verifyCodeApi";
-import {EmailLoginType} from "@/types/request/userRequest";
-import {emailLogin} from "@/api/userApi";
-import {loginSuccess} from "@/config/request";
-import {passwordEncryption} from "@/utils";
-import {Link, useNavigate} from "react-router-dom";
-import {useAppDispatch} from "@/app/hooks";
-import {userInfoAsync} from "@/store/actions/userInfoAction";
-import {setMessageStatus} from "@/store/reducers/messageSlice";
-import {LoginRegExp} from "@/utils/rules";
+import { getImgVerifyCode } from "@/api/verifyCodeApi";
+import { EmailLoginType } from "@/types/request/userRequest";
+import { emailLogin } from "@/api/userApi";
+import { loginSuccess } from "@/config/request";
+import { passwordEncryption } from "@/utils";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@/app/hooks";
+import { userInfoAsync } from "@/store/actions/userInfoAction";
+import { setMessageStatus } from "@/store/reducers/messageSlice";
+import { formRule, LoginRegExp } from "@/utils/rules";
 
 export const EmailLogin: React.FC = () => {
 	const [imgCode, setImgCode] = useState("");
-	const [code,setCode] = useState("");
 	const history = useNavigate();
 	const dispatch = useAppDispatch();
-	const onChange: GetProp<typeof Input.OTP, "onChange"> = (text) => {
-		setCode(text);
-	};
-
-	const sharedProps = {
-		onChange,
-	};
 
 	const onFinish = (values: EmailLoginType) => {
-		values.imgCode = code;
 		if (!values.remember) return;
 		// 进行密码加密
 		values.password = passwordEncryption(values.password);
-		emailLogin(values).then(r=>{
-			if (r.code !== 200) return dispatch(setMessageStatus({typeStatus:"error", message:"登录失败",description:r.msg}));
+		emailLogin(values).then(r => {
+			if (r.code !== 200)
+				return dispatch(
+					setMessageStatus({ typeStatus: "error", message: "登录失败", description: r.msg }),
+				);
 			loginSuccess(r.data.token);
 			dispatch(userInfoAsync());
-			dispatch(setMessageStatus({typeStatus:"success", message:"登录成功",description:r.msg}));
+			dispatch(
+				setMessageStatus({ typeStatus: "success", message: "登录成功", description: r.msg }),
+			);
 			history("/");
 		});
 	};
-	const getImgCode = ()=>{
-		getImgVerifyCode()
-			.then(res=>{
-				console.log(res);
-				setImgCode(res.data.img);
-			});
+	const getImgCode = async () => {
+		const result = await getImgVerifyCode();
+		setImgCode(result.data.img);
 	};
 
-	useEffect(()=>{
+	const handlerImg: React.MouseEventHandler = () => {
 		getImgCode();
-	},[]);
+	};
+
+	useEffect(() => {
+		getImgCode();
+	}, []);
 	return (
 		<Form
 			name="normal_login"
 			className="login-form"
 			initialValues={{ remember: true }}
-			labelCol={{md:3}}
+			labelCol={{ md: 5 }}
 			onFinish={onFinish}
 		>
 			<Form.Item
 				label="邮箱："
 				className="login-item"
 				name="email"
-				rules={[{ required: true, message: "请输入邮箱" },
+				rules={[
+					{ required: true, message: "请输入邮箱" },
 					{
 						pattern: LoginRegExp.email,
 						whitespace: false,
-						message: "邮箱格式错误"
-					},]}
+						message: "邮箱格式错误",
+					},
+				]}
 			>
-				<Input className="login-input" autoComplete={"email"} prefix={<GlobalOutlined className="site-form-item-icon" />} placeholder="请输入电话号码" />
+				<Input
+					className="login-input"
+					autoComplete={"email"}
+					prefix={
+						<MailOutlined className="site-form-item-icon" />
+					}
+					placeholder="请输入邮箱地址"
+				/>
 			</Form.Item>
 			<Form.Item
 				label="密码："
@@ -86,13 +92,27 @@ export const EmailLogin: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="图像验证码："
+				label="图像验证码(区分大小写)："
 				className="login-item"
+				htmlFor={"email-imgCode"}
 				name="imgCode"
-				rules={[{ required: true, message: "请输入图像验证码" }]}>
+				rules={formRule.imgCode}>
 				<Flex>
-					<Input.OTP length={6} {...sharedProps} />
-					<img className={"img-code"} src={imgCode} onClick={getImgCode} alt={"imgCode"}/>
+					<Input
+						id={"email-imgCode"}
+						className="login-input"
+						placeholder={"请输入验证码"}
+					/>
+					{
+						imgCode ?
+							<img
+								className={"img-code"}
+								src={imgCode}
+								onClick={handlerImg}
+								alt={"imgCode"}
+							/> :
+							null
+					}
 				</Flex>
 			</Form.Item>
 			<Form.Item

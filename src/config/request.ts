@@ -1,17 +1,18 @@
-import axios, {AxiosPromise} from "axios";
+import axios, { AxiosPromise } from "axios";
 import Cookies from "js-cookie";
 
 // 请求方法名枚举
+/* eslint-disable no-unused-vars */
 enum RequestMethod {
-	Get = "get",
-	Post = "post",
-	Put = "put",
-	Delete = "delete",
+	GET = "get",
+	POST = "post",
+	PUT = "put",
+	DELETE = "delete",
 }
 
 // 定义请求参数接口
 interface IRequestParams {
-	[key: string]: object|string|number;
+	[key: string]: object | string | number;
 }
 
 export const baseUrl = process.env.REACT_APP_DEBUG_URL;
@@ -28,7 +29,7 @@ function request<T>(
 	method: RequestMethod,
 	url: string,
 	data?: IRequestParams,
-	token?: string
+	token?: string,
 ): AxiosPromise<T> {
 	return axios({
 		baseURL: baseUrl,
@@ -47,7 +48,7 @@ function request<T>(
  * @returns
  */
 export function get<T>(url: string, params?: IRequestParams): AxiosPromise<T> {
-	return request<T>(RequestMethod.Get, url, params, Cookies.get("token"));
+	return request<T>(RequestMethod.GET, url, params, Cookies.get("token"));
 }
 
 /**
@@ -57,7 +58,7 @@ export function get<T>(url: string, params?: IRequestParams): AxiosPromise<T> {
  * @returns
  */
 export function post<T>(url: string, data?: IRequestParams): AxiosPromise<T> {
-	return request<T>(RequestMethod.Post, url, data, Cookies.get("token"));
+	return request<T>(RequestMethod.POST, url, data, Cookies.get("token"));
 }
 
 /**
@@ -67,7 +68,7 @@ export function post<T>(url: string, data?: IRequestParams): AxiosPromise<T> {
  * @returns
  */
 export function put<T>(url: string, data?: IRequestParams): AxiosPromise<T> {
-	return request<T>(RequestMethod.Put, url, data, Cookies.get("token"));
+	return request<T>(RequestMethod.PUT, url, data, Cookies.get("token"));
 }
 
 /**
@@ -77,7 +78,7 @@ export function put<T>(url: string, data?: IRequestParams): AxiosPromise<T> {
  * @returns
  */
 export function del<T>(url: string, params?: IRequestParams): AxiosPromise<T> {
-	return request<T>(RequestMethod.Delete, url, params, Cookies.get("token"));
+	return request<T>(RequestMethod.DELETE, url, params, Cookies.get("token"));
 }
 
 /**
@@ -87,7 +88,7 @@ export function del<T>(url: string, params?: IRequestParams): AxiosPromise<T> {
  * @returns
  */
 export function login<T>(url: string, data?: IRequestParams): AxiosPromise<T> {
-	return request<T>(RequestMethod.Post, url, data);
+	return request<T>(RequestMethod.POST, url, data);
 }
 
 /**
@@ -95,5 +96,5 @@ export function login<T>(url: string, data?: IRequestParams): AxiosPromise<T> {
  * @param token token
  */
 export const loginSuccess = (token: string) => {
-	Cookies.set("token", token,{ expires: 1, path: "/" });
+	Cookies.set("token", token, { expires: 1, path: "/" });
 };

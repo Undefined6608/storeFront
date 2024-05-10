@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "@/assets/fonts/fonts.scss";
 import "@/styles/index.scss";
+import "@/styles/tailwind.scss";
+import "@/styles/output.css";
 import App from "@/App";
 import reportWebVitals from "@/reportWebVitals";
 

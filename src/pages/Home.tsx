@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from "react";
-import {Banner} from "@/components/Banner";
-import {getBannerListApi} from "@/api/product";
+import React, { useEffect, useState } from "react";
+import { Banner } from "@/components/Banner";
+import { getBannerListApi } from "@/api/product";
 import { Spin } from "antd";
-import "./home.module.scss";
-import {BannerResponse} from "@/types/api/product";
-import {ProductListComponent} from "@/components/ProductListComponent";
+import "@/styles/pages/home.scss";
+import { BannerResponse } from "@/types/api/product";
+import { ProductListComponent } from "@/components/ProductListComponent";
 export const Home = () => {
-	const [bannerList,setBannerList] = useState<BannerResponse>();
+	const [bannerList, setBannerList] = useState<BannerResponse>();
 	useEffect(() => {
 		getBannerList();
-	},[]);
+	}, []);
 	const getBannerList = async () => {
 		const result = await getBannerListApi();
 		setBannerList(result.data);
@@ -17,12 +17,12 @@ export const Home = () => {
 
 	return (
 		<>
-			<div className={"container"}>
+			<div className={"container home"}>
 				{
-					bannerList?.bannerList?
+					bannerList?.bannerList ?
 						<>
-							<Banner bannerList={bannerList.bannerList}/>
-							<ProductListComponent/>
+							<Banner bannerList={bannerList.bannerList} />
+							<ProductListComponent />
 						</> :
 						<Spin tip="Loading" size="large">
 							<div className="content" />
