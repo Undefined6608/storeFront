@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Banner } from "@/components/Banner";
-import { getBannerListApi } from "@/api/product";
+import { getBannerListApi } from "@/api/productApi";
 import { Spin } from "antd";
 import "@/styles/pages/home.scss";
 import { BannerResponse } from "@/types/api/product";

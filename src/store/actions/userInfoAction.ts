@@ -6,5 +6,5 @@ export const userInfoAsync = createAsyncThunk(
 	async () => {
 		const response = await getUserInfo();
 		return response.data;
-	}
+	},
 );

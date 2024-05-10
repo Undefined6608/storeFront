@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 
 // 节流函数类型定义
+/* eslint-disable no-unused-vars */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ThrottledFunction<T extends (...args: any[]) => any> = (...args: Parameters<T>) => void;
 
@@ -11,7 +12,8 @@ type ThrottledFunction<T extends (...args: any[]) => any> = (...args: Parameters
  * @returns 节流函数
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useThrottle = <T extends (...args: any[]) => any>(callback: T, delay: number): ThrottledFunction<T> => {
+const useThrottle = <T extends (...args: any[]) => any>(callback: T, delay: number):
+	ThrottledFunction<T> => {
 	const [lastExecTime, setLastExecTime] = useState(0);
 
 	// 将回调函数包装为一个函数，防止每次更新时都重新创建一个函数
@@ -27,7 +29,7 @@ const useThrottle = <T extends (...args: any[]) => any>(callback: T, delay: numb
 				setLastExecTime(currentTime);
 			}
 		},
-		[memoizedCallback, delay, lastExecTime]
+		[memoizedCallback, delay, lastExecTime],
 	);
 };
 

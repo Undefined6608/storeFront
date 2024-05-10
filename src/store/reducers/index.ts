@@ -6,7 +6,7 @@ import messageReducer from "@/store/reducers/messageSlice";
 const rootReducer = combineReducers({
 	userInfo: userInfoReducer,
 	userBtnStatus: userBtnStatusReducer,
-	messageStatus: messageReducer
+	messageStatus: messageReducer,
 });
 
 export default rootReducer;

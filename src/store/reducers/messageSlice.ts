@@ -16,8 +16,8 @@ const userBtnStatusSlice = createSlice({
 	reducers: {
 		setMessageStatus: (state: MessageStatusState, action: PayloadAction<MessageStatus>) => {
 			state.status = action.payload;
-		}
-	}
+		},
+	},
 });
 
 export const getMessageStatus = (state: RootState) => state.root.messageStatus.status;

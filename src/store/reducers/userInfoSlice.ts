@@ -10,7 +10,7 @@ export interface UserInfoState {
 
 const initialState: UserInfoState = {
 	userInfo: null,
-	status: "idle"
+	status: "idle",
 };
 
 const userInfoSlice = createSlice({
@@ -19,7 +19,7 @@ const userInfoSlice = createSlice({
 	reducers: {
 		removeUserInfo: (state: UserInfoState, action: PayloadAction<UserInfoType | null>) => {
 			state.userInfo = action.payload;
-		}
+		},
 	},
 	extraReducers: builder => {
 		builder
@@ -33,7 +33,7 @@ const userInfoSlice = createSlice({
 			.addCase(userInfoAsync.rejected, state => {
 				state.status = "failed";
 			});
-	}
+	},
 });
 
 export const fetchUserInfo = (state: RootState) => state.root.userInfo.userInfo;

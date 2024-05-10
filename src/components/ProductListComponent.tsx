@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Empty, Segmented, Spin } from "antd";
 import { ProductList } from "@/components/ProductList";
-import { getProductListApi, getProductTypeApi } from "@/api/product";
+import { getProductListApi, getProductTypeApi } from "@/api/productApi";
 import { ProductResponse, ProductTypeResponse } from "@/types/api/product";
 import { SegmentedOptions } from "antd/es/segmented";
 

@@ -16,8 +16,8 @@ const userBtnStatusSlice = createSlice({
 	reducers: {
 		setUserBtnStatus: (state: UserBtnStatusState, action: PayloadAction<UserBtnStatus>) => {
 			state.status = action.payload;
-		}
-	}
+		},
+	},
 });
 
 export const getUserBtnStatus = (state: RootState) => state.root.userBtnStatus.status;

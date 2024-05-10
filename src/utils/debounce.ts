@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 // 防抖函数类型定义
+/* eslint-disable no-unused-vars */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DebouncedFunction<T extends (...args: any[]) => any> = (...args: Parameters<T>) => void;
 
@@ -11,7 +12,8 @@ type DebouncedFunction<T extends (...args: any[]) => any> = (...args: Parameters
  * @returns 防抖函数
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useDebounce = <T extends (...args: any[]) => any>(callback: T, delay: number): DebouncedFunction<T> => {
+const useDebounce = <T extends (...args: any[]) => any>(callback: T, delay: number):
+	DebouncedFunction<T> => {
 	const [debouncedCallback, setDebouncedCallback] = useState<DebouncedFunction<T>>(() => {
 		// This is an empty function intentionally.
 		// It gets replaced by the actual debounced function later.
