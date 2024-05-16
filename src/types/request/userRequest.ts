@@ -24,3 +24,20 @@ export interface RegisterType {
 	password: string;
 	verPassword: string;
 }
+
+export interface ModifyUserInfoType {
+	userName: string;
+	phone: string;
+	email: string;
+	avatar: string;
+	gender: number;
+	imgCode: string;
+	emailCode: string;
+}
+
+export interface ModifyPasswordType {
+	oldPassword: string;
+	newPassword: string;
+	verifiedPassword: string;
+	imgCode: string;
+}

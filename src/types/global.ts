@@ -9,3 +9,14 @@ export interface MessageStatus {
 	description: string;
 	typeStatus: NotificationType;
 }
+
+export interface SearchListStatus {
+	status: boolean;
+}
+
+export interface ModalTipsStatus {
+	open: boolean;
+	title: string;
+	message: string;
+	content: string[];
+}

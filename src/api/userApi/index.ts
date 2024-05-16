@@ -1,7 +1,7 @@
 import { get, login, post } from "@/config/request";
 import { BaseResponseType } from "@/types/api";
 import { LoginResponseType, UserInfoType } from "@/types/api/user";
-import { EmailLoginType, PhoneLoginType, RegisterType } from "@/types/request/userRequest";
+import { EmailLoginType, ModifyPasswordType, ModifyUserInfoType, PhoneLoginType, RegisterType } from "@/types/request/userRequest";
 import { EmailOccupy, PhoneOccupy, UserNameOccupy } from "@/types/request/occupy";
 
 // 用户名查重接口
@@ -9,8 +9,7 @@ export const userNameOccupy = (body: UserNameOccupy) =>
 	post<BaseResponseType<string>>(
 		"/user/userNameOccupy",
 		{ ...body },
-	)
-		.then(r => r.data);
+	).then(r => r.data);
 
 // 电话号码查重接口
 export const phoneOccupy = (body: PhoneOccupy) =>
@@ -57,6 +56,20 @@ export const emailLogin = (body: EmailLoginType) =>
 // 用户信息获取接口
 export const getUserInfo = () =>
 	get<BaseResponseType<UserInfoType>>("/user/userInfo").then(r => r.data);
+
+// 用户信息修改
+export const modifyUserInfoApi = (body: ModifyUserInfoType) =>
+	post<BaseResponseType<string>>(
+		"/user/modifyUserInfo",
+		{ ...body },
+	).then(r => r.data);
+
+// 用户修改密码
+export const modifyPasswordApi = (body: ModifyPasswordType) =>
+	post<BaseResponseType<string>>(
+		"/user/modifyPassword",
+		{ ...body },
+	).then(r => r.data);
 
 // 退出登录
 export const logout = () =>

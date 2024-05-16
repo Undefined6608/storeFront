@@ -11,7 +11,6 @@ function App() {
 				<AppRouter />
 			</div>
 		</Provider>
-
 	);
 }
 

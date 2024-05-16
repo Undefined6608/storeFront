@@ -1,5 +1,6 @@
 const path = require('path');
 const TerserPlugin = require("terser-webpack-plugin");
+const CracoCSSModules = require('craco-css-modules');
 
 module.exports = {
 	webpack: {
@@ -52,13 +53,7 @@ module.exports = {
 			}
 		}
 	},
-	style: {
-		sass: {
-			loaderOptions: {
-				sassOptions: {
-					includePaths: [path.resolve(__dirname, 'src/styles'), path.resolve(__dirname, 'src/assets')],
-				},
-			}
-		}
-	}
+	plugins: [
+		{plugin: CracoCSSModules}
+	]
 };
