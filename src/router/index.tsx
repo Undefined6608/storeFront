@@ -24,6 +24,7 @@ import { MessageComponent } from "@/components/Message/MessageComponent";
 import { notification } from "antd";
 import { ForgotPassword } from "@/pages/ForgotPassword/ForgotPassword";
 import { ContactUs } from "@/pages/ContactUs/ContactUs";
+import { BottomComponent } from "@/components/BottonComponent/BottomCompont";
 // 引入组件
 
 export const AppRouter = () => {
@@ -62,6 +63,7 @@ export const AppRouter = () => {
 				<Route path="/register" element={<Register />} />
 				<Route path="/forgotPassword" element={<ForgotPassword />} />
 			</Routes>
+			<BottomComponent/>
 		</BrowserRouter>
 	);
 };

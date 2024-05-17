@@ -15,6 +15,14 @@ export const getProductTypeApi = () =>
 	get<BaseResponseType<ProductTypeResponse>>("/product/getProductType")
 		.then(r => r.data);
 
-export const getProductListApi = (typeId: number) =>
+export const getProductListApi = () =>
+	get<BaseResponseType<ProductResponse>>("/product/getProductList")
+		.then(r => r.data);
+
+export const getProductListByTypeIdApi = (typeId: number) =>
 	get<BaseResponseType<ProductResponse>>(`/product/getProductList?typeId=${typeId}`)
+		.then(r => r.data);
+
+export const getProductListByUserUidApi = (userUid: string) =>
+	get<BaseResponseType<ProductResponse>>(`/product/getProductList?userUid=${userUid}`)
 		.then(r => r.data);

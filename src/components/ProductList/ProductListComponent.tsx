@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Empty, Segmented, Spin } from "antd";
 import { ProductList } from "./ProductList";
-import { getProductListApi, getProductTypeApi } from "@/api/productApi";
+import { getProductListByTypeIdApi, getProductTypeApi } from "@/api/productApi";
 import { ProductResponse, ProductTypeResponse } from "@/types/api/product";
 import { SegmentedOptions } from "antd/es/segmented";
 
@@ -20,7 +20,7 @@ export const ProductListComponent: React.FC = () => {
 
 	// 获取商品列表
 	const getProductList = async (typeId: number) => {
-		const result = await getProductListApi(typeId);
+		const result = await getProductListByTypeIdApi(typeId);
 		setProductList(result.data);
 	};
 
