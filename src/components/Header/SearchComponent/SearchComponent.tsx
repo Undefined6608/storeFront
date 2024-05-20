@@ -4,14 +4,19 @@ import { useAppDispatch } from "@/app/hooks";
 import { setSearchListStatus } from "@/store/reducers/searchListStatusSlice";
 
 export const SearchComponent: React.FC = () => {
+
 	// 输入框内容
 	const [inputValue, setInputValue] = useState("");
+
 	// 输入框提示
 	const [tipShow, setTipShow] = useState(true);
+
 	// 输入框组件
 	const inputRef = useRef<HTMLInputElement>(null);
+
 	// 开启搜索列表
 	const dispatch = useAppDispatch();
+
 	/**
 	 * 更新输入框内部组件显示内容
 	 * @param ev 组件输入事件参数
@@ -27,6 +32,7 @@ export const SearchComponent: React.FC = () => {
 		setTipShow(false);
 		dispatch(setSearchListStatus({ status: true }));
 	};
+
 	/**
 	 * 键盘监听事件
 	 */

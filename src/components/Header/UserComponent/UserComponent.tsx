@@ -6,9 +6,13 @@ import { fetchUserInfo } from "@/store/reducers/userInfoSlice";
 import { getUserBtnStatus, setUserBtnStatus } from "@/store/reducers/userBtnStatusSlice";
 
 export const UserComponent = () => {
+
 	const history = useNavigate();
+
 	const userInfo = useAppSelector(fetchUserInfo);
+
 	const dispatch = useAppDispatch();
+
 	const show = useAppSelector(getUserBtnStatus);
 
 	const loginHandler = () => {
@@ -18,6 +22,7 @@ export const UserComponent = () => {
 	const showUserBtn = () => {
 		dispatch(setUserBtnStatus({ status: !show?.status }));
 	};
+
 	return (
 		<div className="user-component">
 			<div className="user-icon">

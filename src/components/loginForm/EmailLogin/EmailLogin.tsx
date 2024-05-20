@@ -14,8 +14,11 @@ import { setMessageStatus } from "@/store/reducers/messageSlice";
 import { formRule, LoginRegExp } from "@/utils/rules";
 
 export const EmailLogin: React.FC = () => {
+
 	const [imgCode, setImgCode] = useState("");
+
 	const history = useNavigate();
+
 	const dispatch = useAppDispatch();
 
 	const onFinish = (values: EmailLoginType) => {
@@ -35,6 +38,7 @@ export const EmailLogin: React.FC = () => {
 			history("/");
 		});
 	};
+
 	const getImgCode = async () => {
 		const result = await getImgVerifyCode();
 		setImgCode(result.data.img);
@@ -47,6 +51,7 @@ export const EmailLogin: React.FC = () => {
 	useEffect(() => {
 		getImgCode();
 	}, []);
+
 	return (
 		<Form
 			name="normal_login"

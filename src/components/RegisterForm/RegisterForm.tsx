@@ -37,22 +37,35 @@ interface LimitItem {
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
 export const RegisterForm: React.FC = () => {
+
 	const [imgCode, setImgCode] = useState("");
+
 	const [email, setEmail] = useState("");
+
 	const [emailBtn, setEmailBtn] = useState("获取邮箱验证码");
+
 	const [emailBtnStatus, setEmailBtnStatus] = useState(false);
+
 	const dispatch = useAppDispatch();
+
 	const history = useNavigate();
+
 	const [loading, setLoading] = useState(false);
+
 	const [imageUrl, setImageUrl] = useState<string>();
+
 	const baseUploadUrl = baseUploadImgUrl();
+
 	// 表单实例
 	const [form] = Form.useForm();
+
 	const limitList = useRef<LimitItem[]>([
 		{ value: 2, label: "商户" },
 		{ value: 3, label: "普通用户" },
 	]);
+
 	let timer: NodeJS.Timer | null = null;
+
 	let btnTimer = 60;
 
 	const beforeUpload = (file: FileType) => {
@@ -78,10 +91,12 @@ export const RegisterForm: React.FC = () => {
 	const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(event.target.value);
 	};
+
 	const getImgCode = async () => {
 		const result = await getImgVerifyCode();
 		setImgCode(result.data.img);
 	};
+
 	const handlerEmailCode = async () => {
 		if (timer != null) return;
 		if (email === "")
@@ -161,6 +176,7 @@ export const RegisterForm: React.FC = () => {
 	useEffect(() => {
 		getImgCode();
 	}, []);
+
 	return (
 		<>
 			<Card className={"register-card pr-20"} title={"Register"}>

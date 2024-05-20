@@ -1,14 +1,5 @@
-import axios, { AxiosPromise } from "axios";
+import axios, { AxiosPromise, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
-
-// 请求方法名枚举
-/* eslint-disable no-unused-vars */
-enum RequestMethod {
-	GET = "get",
-	POST = "post",
-	PUT = "put",
-	DELETE = "delete",
-}
 
 // 定义请求参数接口
 interface IRequestParams {
@@ -25,21 +16,46 @@ export const baseUrl = process.env.REACT_APP_DEBUG_URL;
  * @param data 请求参数
  * @param token token
  */
-function request<T>(
-	method: RequestMethod,
-	url: string,
-	data?: IRequestParams,
-	token?: string,
-): AxiosPromise<T> {
-	return axios({
-		baseURL: baseUrl,
-		withCredentials: true,
-		headers: { "Content-Type": "application/json", "Authorization": token ? token : "" },
-		method,
-		url,
-		data,
-	});
-}
+const request = axios.create({
+	baseURL: baseUrl,
+	timeout: 10000,
+	withCredentials: true,
+	headers: {
+		"Content-Type": "application/json",
+	},
+});
+
+// 请求拦截器
+request.interceptors.request.use(
+	(config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
+		// 在这里可以添加请求头，例如添加认证 token
+		const token = Cookies.get("token");
+		if (token) {
+			config.headers.Authorization = `${token}`;
+		}
+		return config;
+	},
+	(error) => {
+		// 处理请求错误
+		return Promise.reject(error);
+	},
+);
+
+// 响应拦截器
+request.interceptors.response.use(
+	(response: AxiosResponse): AxiosResponse => {
+		// 处理响应数据
+		return response;
+	},
+	(error) => {
+		// 处理响应错误
+		if (error.response?.status === 401) {
+			// 例如：如果未授权，可以跳转到登录页面
+			window.location.href = "/login";
+		}
+		return Promise.reject(error);
+	},
+);
 
 /**
  * get 请求方法
@@ -47,8 +63,8 @@ function request<T>(
  * @param params 请求参数
  * @returns
  */
-export function get<T>(url: string, params?: IRequestParams): AxiosPromise<T> {
-	return request<T>(RequestMethod.GET, url, params, Cookies.get("token"));
+export function get<T>(url: string): AxiosPromise<T> {
+	return request.get<T>(url);
 }
 
 /**
@@ -58,7 +74,7 @@ export function get<T>(url: string, params?: IRequestParams): AxiosPromise<T> {
  * @returns
  */
 export function post<T>(url: string, data?: IRequestParams): AxiosPromise<T> {
-	return request<T>(RequestMethod.POST, url, data, Cookies.get("token"));
+	return request.post<T>(url, data);
 }
 
 /**
@@ -68,7 +84,7 @@ export function post<T>(url: string, data?: IRequestParams): AxiosPromise<T> {
  * @returns
  */
 export function put<T>(url: string, data?: IRequestParams): AxiosPromise<T> {
-	return request<T>(RequestMethod.PUT, url, data, Cookies.get("token"));
+	return request.put<T>(url, data);
 }
 
 /**
@@ -77,8 +93,8 @@ export function put<T>(url: string, data?: IRequestParams): AxiosPromise<T> {
  * @param params 请求参数
  * @returns
  */
-export function del<T>(url: string, params?: IRequestParams): AxiosPromise<T> {
-	return request<T>(RequestMethod.DELETE, url, params, Cookies.get("token"));
+export function del<T>(url: string): AxiosPromise<T> {
+	return request.delete<T>(url);
 }
 
 /**
@@ -88,7 +104,7 @@ export function del<T>(url: string, params?: IRequestParams): AxiosPromise<T> {
  * @returns
  */
 export function login<T>(url: string, data?: IRequestParams): AxiosPromise<T> {
-	return request<T>(RequestMethod.POST, url, data);
+	return request.post<T>(url, data);
 }
 
 /**

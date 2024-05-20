@@ -30,7 +30,7 @@ export const UserProduct: React.FC<{ data: ProductTableType[] }> = (props) => {
 			width: 100,
 			dataIndex: "type_id",
 			key: "type_id",
-			render: (type_id: number,record) => <Select value={type_id} disabled={!record.modify}>
+			render: (type_id: number,record) => <Select className={"w-full"} value={type_id} disabled={!record.modify}>
 				{
 					productTypeOptions.map(item =>
 						<Select.Option key={item.id + "productType"} value={item.id}>{item.type}</Select.Option>,
@@ -47,7 +47,7 @@ export const UserProduct: React.FC<{ data: ProductTableType[] }> = (props) => {
 			width: 100,
 			dataIndex: "price",
 			key: "price",
-			render: (price: number,record) => <Flex className="items-center"><InputNumber value={price} disabled={!record.modify} /><span>￥</span></Flex>,
+			render: (price: number,record) => <Flex className="items-center w-full"><InputNumber className={"flex-1"} value={price} disabled={!record.modify} /><span>￥</span></Flex>,
 		}, {
 			title: "商品描述",
 			width: 200,

@@ -6,7 +6,9 @@ import { Carousel, CarouselProps } from "antd";
 type DotPosition = CarouselProps["dotPosition"];
 
 export const Banner: React.FC<BannerResponse> = ({ bannerList }) => {
+
 	const [dotPosition] = useState<DotPosition>("bottom");
+
 	return (
 		<>
 			{

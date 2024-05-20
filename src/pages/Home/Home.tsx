@@ -6,10 +6,13 @@ import "./home.scss";
 import { BannerResponse } from "@/types/api/product";
 import { ProductListComponent } from "@/components/ProductList/ProductListComponent";
 export const Home = () => {
+
 	const [bannerList, setBannerList] = useState<BannerResponse>();
+
 	useEffect(() => {
 		getBannerList();
 	}, []);
+
 	const getBannerList = async () => {
 		const result = await getBannerListApi();
 		setBannerList(result.data);

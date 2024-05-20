@@ -1,6 +1,7 @@
 import React from "react";
 import { ProductItemType } from "./api/product";
 import { UserInfoType } from "./api/user";
+import { UserLoadType } from "./api/orderForm";
 
 export interface NavType {
 	id: string;
@@ -24,6 +25,11 @@ export interface ProductTableType extends ProductItemType {
 }
 
 export interface UserTableType extends UserInfoType {
+	key: React.Key;
+	modify: boolean;
+}
+
+export interface UserLoadTableType extends UserLoadType {
 	key: React.Key;
 	modify: boolean;
 }

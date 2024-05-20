@@ -5,6 +5,7 @@ import { Button, Card, Flex } from "antd";
 import React, { useEffect, useState } from "react";
 
 export const AllProductList: React.FC = () => {
+
 	// 创建列表
 	const [productList, setProductList] = useState<ProductTableType[]>([]);
 
@@ -16,6 +17,7 @@ export const AllProductList: React.FC = () => {
 			setProductList(list);
 		}
 	};
+
 	// 添加商品
 	const addProduct = () => {
 		setProductList([]);
@@ -25,6 +27,7 @@ export const AllProductList: React.FC = () => {
 	useEffect(() => {
 		getProductListByUser();
 	}, []);
+
 	return (
 		<>
 			<div className={"container-page w-full"}>

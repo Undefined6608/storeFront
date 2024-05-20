@@ -3,7 +3,9 @@ import { getSearchListStatus } from "@/store/reducers/searchListStatusSlice";
 import React from "react";
 
 export const SearchList: React.FC = () => {
+
 	const searchListStatus = useAppSelector(getSearchListStatus);
+
 	return (
 		<>
 			{

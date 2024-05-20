@@ -12,25 +12,34 @@ import { getImgVerifyCode, sendEmailCode } from "@/api/verifyCodeApi";
 import { ModifyUserInfoType } from "@/types/request/userRequest";
 
 export const User: React.FC = () => {
+
 	// 用户信息
 	const userInfo = useAppSelector(fetchUserInfo);
+
 	// 用户信息状态/是否更改
 	const [userInfoStatus, setUserInfoStatus] = useState(false);
+
 	// 拉取store更改方法
 	const dispatch = useAppDispatch();
+
 	// 获取路由
 	const history = useNavigate();
+
 	// 弹出框
 	const [modalTips, setModalTips] = useState<ModalTipsStatus>({ open: false, title: "", message: "", content: [] });
 	const [modalTips1, setModalTips1] = useState<ModalTipsStatus>({ open: false, title: "", message: "", content: [] });
+
 	// 图像验证码
 	const [imgCode, setImgCode] = useState("");
+
 	// 邮箱验证码按钮状态
 	const [emailBtnStatus, setEmailBtnStatus] = useState(false);
 	const [emailCodeBtnStatus, setEmailCodeBtnStatus] = useState("获取邮箱验证码");
+
 	// 邮箱验证码倒计时状态
 	let timer: NodeJS.Timer | null = null;
 	let btnTimer = 60;
+
 	// 用户信息上传参数
 	const [userInfoParams, setUserInfoParams] = useState<ModifyUserInfoType>({
 		userName: "",
@@ -56,11 +65,13 @@ export const User: React.FC = () => {
 			});
 		}
 	};
+
 	// 获取图像验证码
 	const getImgCode = async () => {
 		const result = await getImgVerifyCode();
 		setImgCode(result.data.img);
 	};
+
 	// 获取邮箱验证码
 	const getEmailCode = async () => {
 		if (timer != null) return;
@@ -88,6 +99,7 @@ export const User: React.FC = () => {
 			setEmailCodeBtnStatus(btnTimer.toString()+"s 后重新获取");
 		}, 1000);
 	};
+
 	// 用户修改
 	const handlerModify = () => {
 		// 打开修改状态
@@ -97,10 +109,12 @@ export const User: React.FC = () => {
 			uploadUserInfo();
 		}
 	};
+
 	// 取消修改
 	const handlerCancel = () => {
 		setUserInfoStatus(false);
 	};
+
 	// 提交用户修改
 	const uploadUserInfo = () => {
 		setModalTips1({
@@ -110,6 +124,7 @@ export const User: React.FC = () => {
 			open: true,
 		});
 	};
+
 	// 退出登录
 	const handlerLogout = () => {
 		// 弹出对话框
@@ -120,6 +135,7 @@ export const User: React.FC = () => {
 			content: ["确定退出登录吗？"],
 		});
 	};
+
 	// 弹出框点击确定
 	const handlerModalOk = async () => {
 		closeModal();
@@ -136,6 +152,7 @@ export const User: React.FC = () => {
 			history("/");
 		}
 	};
+
 	// 修改确定框点击确定
 	const handlerModifyOk = async () => {
 		const res = await modifyUserInfoApi(userInfoParams);
@@ -149,23 +166,28 @@ export const User: React.FC = () => {
 		closeModal();
 		setUserInfoStatus(false);
 	};
+
 	// 弹出框点击取消
 	const handlerModalCancel = () => {
 		closeModal();
 	};
+
 	// 关闭弹出框
 	const closeModal = () => {
 		setModalTips({ open: false, title: "", message: "", content: [] });
 		setModalTips1({ open: false, title: "", message: "", content: [] });
 	};
+
 	// 第一次加载
 	useEffect(() => {
 		getImgCode();
 	}, []);
+
 	// 每次加载页面
 	useEffect(() => {
 		handlerUserInfoParams();
-	},[userInfo]);
+	}, [userInfo]);
+
 	return (
 		<div>
 			{

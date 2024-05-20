@@ -4,6 +4,7 @@ import { ProductItem } from "@/components/item/ProductItem/ProductItem";
 import "./productList.scss";
 
 export const ProductList: React.FC<ProductResponse> = ({ productList }) => {
+
 	return (
 		<div className={"productList"}>
 			{

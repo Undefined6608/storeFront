@@ -8,7 +8,9 @@ import { BaseProps } from "@/types";
 import { SegmentedOptions } from "antd/es/segmented";
 
 export const LoginForm: React.FC<BaseProps> = (props) => {
+
 	const [value, setValue] = useState<number>(1);
+
 	const options = useRef<SegmentedOptions<number>>([
 		{
 			label: "手机号登录",
@@ -21,6 +23,7 @@ export const LoginForm: React.FC<BaseProps> = (props) => {
 			icon: <MailFilled />,
 		},
 	]);
+
 	return (
 		<div className="login-form" style={props.style}>
 			<Card className="login-card">

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./navComponent.scss";
 
 export const NavComponent: React.FC<{ navList: NavType[] }> = (props) => {
+
 	return (
 		<div className="nav-component">
 			{

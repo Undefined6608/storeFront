@@ -11,10 +11,15 @@ import Cookies from "js-cookie";
 import { setMessageStatus } from "@/store/reducers/messageSlice";
 
 export const UserBtnList: React.FC = () => {
+
 	const userBtnStatus = useAppSelector(getUserBtnStatus);
+
 	const dispatch = useAppDispatch();
+
 	const userInfo = useAppSelector(fetchUserInfo);
+
 	const history = useNavigate();
+
 	const baseUserBtnList = useRef<UserBtnType[]>([
 		{ id: "user-btn-1", title: "用户信息", link: "/user" },
 		{ id: "user-btn-2", title: "收货地址", link: "/userLoad" },
@@ -24,14 +29,17 @@ export const UserBtnList: React.FC = () => {
 		{ id: "user-btn-6", title: "修改密码", link: "/modifyPassword" },
 		{ id: "user-btn-7", title: "退出登录", link: "/" },
 	]);
+
 	const merchantBtnList = useRef<UserBtnType[]>([
 		{ id: "merchant-btn-1", title: "商品列表", link: "/productList" },
 		{ id: "merchant-btn-2", title: "统计图表", link: "/charts" },
 	]);
+
 	const adminBtnList = useRef<UserBtnType[]>([
 		{ id: "admin-btn-1", title: "用户列表", link: "/userList" },
 		{ id: "admin-btn-2", title: "全部商品列表", link: "/allProductList" },
 	]);
+
 	const btnHandler = async(value: UserBtnType) => {
 		if (value.id === "user-btn-7") {
 			// 调用退出登录接口
@@ -49,9 +57,11 @@ export const UserBtnList: React.FC = () => {
 		history(value.link);
 		closeHandler();
 	};
+
 	const closeHandler = () => {
 		dispatch(setUserBtnStatus({ status: false }));
 	};
+
 	return (
 		<>
 			{

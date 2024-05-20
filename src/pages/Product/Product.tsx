@@ -7,8 +7,10 @@ import { Button, Card, Flex } from "antd";
 import React, { useEffect, useState } from "react";
 
 export const Product: React.FC = () => {
+
 	// 获取用户信息
 	const userInfo = useAppSelector(fetchUserInfo);
+
 	// 创建列表
 	const [productList, setProductList] = useState<ProductTableType[]>([]);
 
@@ -22,6 +24,7 @@ export const Product: React.FC = () => {
 			}
 		}
 	};
+
 	// 添加商品
 	const addProduct = () => {
 		setProductList([]);

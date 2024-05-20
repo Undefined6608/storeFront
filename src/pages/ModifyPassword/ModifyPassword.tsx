@@ -12,8 +12,10 @@ import { passwordEncryption } from "@/utils";
 import { removeUserInfo } from "@/store/reducers/userInfoSlice";
 
 export const ModifyPassword: React.FC = () => {
+
 	// 图像验证码
 	const [imgCode, setImgCode] = useState("");
+
 	// 修改密码数据
 	const [formData, setFormData] = useState<ModifyPasswordType>({
 		oldPassword: "",
@@ -21,6 +23,7 @@ export const ModifyPassword: React.FC = () => {
 		verifiedPassword: "",
 		imgCode: "",
 	});
+
 	// 弹出提示
 	const [modal, setModal] = useState({
 		title: "",
@@ -52,13 +55,17 @@ export const ModifyPassword: React.FC = () => {
 
 	// 弹窗确定
 	const handlerOk = async () => {
+
 		const formVal = formData;
+
 		// 密码加密
 		formVal.oldPassword = passwordEncryption(formVal.oldPassword.trim());
 		formVal.newPassword = passwordEncryption(formVal.newPassword.trim());
 		formVal.verifiedPassword = passwordEncryption(formVal.verifiedPassword.trim());
+
 		// 调用修改密码接口
 		const result = await modifyPasswordApi(formData);
+
 		if (result.code === 200) {
 			dispatch(setMessageStatus({ typeStatus: "success", message: "密码修改成功", description: "请重新登录！" }));
 			// 清除Cookie
@@ -68,8 +75,10 @@ export const ModifyPassword: React.FC = () => {
 			// 跳转到登录页面
 			history("/login");
 		}
+
 		handlerCancel();
 	};
+
 	// 弹窗取消
 	const handlerCancel = () => {
 		setModal({ title: "", open: false, content: [] });
@@ -78,6 +87,7 @@ export const ModifyPassword: React.FC = () => {
 	useEffect(() => {
 		getImgCode();
 	}, []);
+
 	return (
 		<>
 			<div className={"container-page w-full modifyPassword flex flex-col items-end justify-center"}>

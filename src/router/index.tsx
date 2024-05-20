@@ -28,7 +28,9 @@ import { BottomComponent } from "@/components/BottonComponent/BottomCompont";
 // 引入组件
 
 export const AppRouter = () => {
+
 	const dispatch = useAppDispatch();
+
 	useEffect(() => {
 		notification.config({
 			placement: "topRight",
@@ -40,6 +42,7 @@ export const AppRouter = () => {
 			dispatch(userInfoAsync());
 		}
 	}, []);
+
 	return (
 		<BrowserRouter>
 			<Header />
@@ -63,7 +66,7 @@ export const AppRouter = () => {
 				<Route path="/register" element={<Register />} />
 				<Route path="/forgotPassword" element={<ForgotPassword />} />
 			</Routes>
-			<BottomComponent/>
+			<BottomComponent />
 		</BrowserRouter>
 	);
 };

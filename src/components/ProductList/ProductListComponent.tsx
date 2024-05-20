@@ -8,8 +8,11 @@ import { SegmentedOptions } from "antd/es/segmented";
 export const ProductListComponent: React.FC = () => {
 
 	const [productType, setProductType] = useState<ProductTypeResponse>();
+
 	const [typeOptions, setTypeOptions] = useState<SegmentedOptions<number>>([]);
+
 	const [selectOption, setSelectOption] = useState<number>(1);
+
 	const [productList, setProductList] = useState<ProductResponse>();
 
 	// 初始化
@@ -44,11 +47,13 @@ export const ProductListComponent: React.FC = () => {
 			setTypeOptions(option);
 		}
 	};
+
 	// 商品类型选择
 	const typeHandler = (value: number) => {
 		setSelectOption(value);
 		getProductList(value);
 	};
+
 	// 抛出 TSX 组件
 	return (
 		<>

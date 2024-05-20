@@ -64,6 +64,10 @@ export const modifyUserInfoApi = (body: ModifyUserInfoType) =>
 		{ ...body },
 	).then(r => r.data);
 
+// 获取全部用户信息
+export const getAllUserApi = () =>
+	get<BaseResponseType<{allUserList:UserInfoType[]}>>("/user/allUserInfo").then(r => r.data);
+
 // 用户修改密码
 export const modifyPasswordApi = (body: ModifyPasswordType) =>
 	post<BaseResponseType<string>>(

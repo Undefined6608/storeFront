@@ -4,17 +4,21 @@ import React, { useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 export const BottomComponent: React.FC = () => {
+
 	const location = useLocation();
+
 	const bottomPaths = useRef<string[]>([
 		"/",
 		"/shop",
 		"/contact-us",
 	]);
+
 	const bottomQr = useRef<BottomQrType[]>([
 		{ id: 1, title: "Blog", qrCode: "/static/bottom/blog.png" },
 		{ id: 2, title: "GitHub", qrCode: "/static/bottom/github.png" },
 		{ id: 3, title: "线上地址", qrCode: "/static/bottom/project.png" },
 	]);
+
 	return (
 		<>
 			{

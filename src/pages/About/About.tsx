@@ -3,6 +3,7 @@ import { Card, Flex, Watermark } from "antd";
 import "./about.scss";
 
 export const About = () => {
+
 	return (
 		<>
 			<Watermark
