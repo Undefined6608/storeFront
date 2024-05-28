@@ -12,6 +12,7 @@ import { useAppDispatch } from "@/app/hooks";
 import { userInfoAsync } from "@/store/actions/userInfoAction";
 import { setMessageStatus } from "@/store/reducers/messageSlice";
 import { formRule, LoginRegExp } from "@/utils/rules";
+import {clearShoppingCartStatus} from "@/store/reducers/shoppingCartSlice";
 
 export const EmailLogin: React.FC = () => {
 
@@ -35,6 +36,7 @@ export const EmailLogin: React.FC = () => {
 			dispatch(
 				setMessageStatus({ typeStatus: "success", message: "登录成功", description: r.msg }),
 			);
+			dispatch(clearShoppingCartStatus({clear:true}));
 			history("/");
 		});
 	};

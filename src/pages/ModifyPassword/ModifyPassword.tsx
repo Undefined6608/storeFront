@@ -48,14 +48,14 @@ export const ModifyPassword: React.FC = () => {
 		setModal({ title: "确认要更新密码吗？", open: true, content: [] });
 	};
 
-	// 取消
+	// 取消更新
 	const cancel = () => {
 		setFormData({ oldPassword: "", newPassword: "", verifiedPassword: "", imgCode: "" });
 	};
 
 	// 弹窗确定
 	const handlerOk = async () => {
-
+		// 表单数据
 		const formVal = formData;
 
 		// 密码加密
@@ -66,7 +66,9 @@ export const ModifyPassword: React.FC = () => {
 		// 调用修改密码接口
 		const result = await modifyPasswordApi(formData);
 
+		// 响应值code是否为200
 		if (result.code === 200) {
+			// 弹出提示框
 			dispatch(setMessageStatus({ typeStatus: "success", message: "密码修改成功", description: "请重新登录！" }));
 			// 清除Cookie
 			Cookies.remove("token");
@@ -75,7 +77,7 @@ export const ModifyPassword: React.FC = () => {
 			// 跳转到登录页面
 			history("/login");
 		}
-
+		// 关闭弹窗
 		handlerCancel();
 	};
 
@@ -84,6 +86,7 @@ export const ModifyPassword: React.FC = () => {
 		setModal({ title: "", open: false, content: [] });
 	};
 
+	// 页面加载获取数据
 	useEffect(() => {
 		getImgCode();
 	}, []);

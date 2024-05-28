@@ -11,7 +11,7 @@ const initialState: SearchListStatusState = {
 };
 
 const searchListSlice = createSlice({
-	name: "userInfo",
+	name: "searchList",
 	initialState,
 	reducers: {
 		setSearchListStatus: (state: SearchListStatusState, action: PayloadAction<SearchListStatus>) => {

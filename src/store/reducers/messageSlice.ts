@@ -2,16 +2,18 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store";
 import { MessageStatus } from "@/types/global"; // 导入用户信息的类型
 
+// 弹窗信息接口
 export interface MessageStatusState {
 	status: MessageStatus | null;
 }
 
+// 初始化数据
 const initialState: MessageStatusState = {
 	status: null,
 };
 
-const userBtnStatusSlice = createSlice({
-	name: "userInfo",
+const messageStatusSlice = createSlice({
+	name: "messageStatus",
 	initialState,
 	reducers: {
 		setMessageStatus: (state: MessageStatusState, action: PayloadAction<MessageStatus>) => {
@@ -22,5 +24,5 @@ const userBtnStatusSlice = createSlice({
 
 export const getMessageStatus = (state: RootState) => state.root.messageStatus.status;
 
-export const { setMessageStatus } = userBtnStatusSlice.actions;
-export default userBtnStatusSlice.reducer;
+export const { setMessageStatus } = messageStatusSlice.actions;
+export default messageStatusSlice.reducer;

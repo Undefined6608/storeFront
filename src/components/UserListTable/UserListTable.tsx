@@ -1,10 +1,18 @@
-import { UserTableType } from "@/types";
-import { Button, Flex, Input, Select, Table, TableColumnsType } from "antd";
-import React, { useState } from "react";
+import {UserTableType} from "@/types";
+import {Button, Flex, Input, Popconfirm, Select, Table, TableColumnsType} from "antd";
+import React, {useState} from "react";
+import {deleteUserApi} from "@/api/userApi";
+import {useAppDispatch} from "@/app/hooks";
+import {setMessageStatus} from "@/store/reducers/messageSlice";
+import {useNavigate} from "react-router-dom";
 
 export const UserListTable: React.FC<{ userList: UserTableType[] }> = (props) => {
 
 	const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+
+	const dispatch = useAppDispatch();
+
+	const history = useNavigate();
 
 	const columns: TableColumnsType<UserTableType> = [
 		{
@@ -18,13 +26,13 @@ export const UserListTable: React.FC<{ userList: UserTableType[] }> = (props) =>
 			width: 90,
 			dataIndex: "avatar",
 			key: "avatar",
-			render: (avatar: string) => <img src={avatar} style={{ width: 70, height: 70 }} />,
+			render: (avatar: string) => <img src={avatar} style={{width: 70, height: 70}}/>,
 		}, {
 			title: "用户名",
 			width: 150,
 			dataIndex: "userName",
 			key: "userName",
-			render: (userName: string, record) => <Input value={userName} disabled={!record.modify} />,
+			render: (userName: string, record) => <Input value={userName} disabled={!record.modify}/>,
 		}, {
 			title: "用户ID",
 			width: 150,
@@ -35,7 +43,7 @@ export const UserListTable: React.FC<{ userList: UserTableType[] }> = (props) =>
 			width: 100,
 			dataIndex: "gender",
 			key: "gender",
-			render: (gender: boolean,record) => <Select className="w-full" value={gender} disabled={!record.modify}>
+			render: (gender: boolean, record) => <Select className="w-full" value={gender} disabled={!record.modify}>
 				<Select.Option value={false}>男</Select.Option>
 				<Select.Option value={true}>女</Select.Option>
 			</Select>,
@@ -44,13 +52,13 @@ export const UserListTable: React.FC<{ userList: UserTableType[] }> = (props) =>
 			width: 200,
 			dataIndex: "email",
 			key: "email",
-			render: (price: number, record) => <Input value={price} disabled={!record.modify} />,
+			render: (price: number, record) => <Input value={price} disabled={!record.modify}/>,
 		}, {
 			title: "电话号码",
 			width: 150,
 			dataIndex: "phone",
 			key: "phone",
-			render: (phone: string, record) => <Input value={phone} disabled={!record.modify} />,
+			render: (phone: string, record) => <Input value={phone} disabled={!record.modify}/>,
 		}, {
 			title: "用户积分",
 			width: 60,
@@ -73,13 +81,21 @@ export const UserListTable: React.FC<{ userList: UserTableType[] }> = (props) =>
 			key: "dontLike",
 		}, {
 			title: "操作",
-			width: 200,
+			width: 100,
 			dataIndex: "tools",
 			key: "tools",
 			render: (_, record) => (
 				<Flex className=" items-center">
-					<Button className="mr-3" type="primary" onClick={() => record.modify = !record.modify}>修改</Button>
-					<Button type="default">删除</Button>
+					{/*<Button className="mr-3" type="primary" onClick={() => record.modify = !record.modify}>修改</Button>*/}
+					<Popconfirm
+						title="删除用户"
+						description="确认要删除用户吗？"
+						onConfirm={() => handlerDelete(record.uid)}
+						okText="Yes"
+						cancelText="No"
+					>
+						<Button type="default" danger>删除</Button>
+					</Popconfirm>
 				</Flex>
 			),
 		},
@@ -94,9 +110,20 @@ export const UserListTable: React.FC<{ userList: UserTableType[] }> = (props) =>
 		onChange: onSelectChange,
 	};
 
+	// 确定删除用户
+	const handlerDelete = async (uid: string) => {
+		const res = await deleteUserApi({userUid: uid});
+		if (res.code !== 200) {
+			dispatch(setMessageStatus({typeStatus: "error", message: "用户删除失败！", description: res.msg}));
+			return;
+		}
+		dispatch(setMessageStatus({typeStatus: "success", message: "用户删除成功！", description: ""}));
+		history(0);
+	};
+
 	return (
 		<>
-			<Table className="w-full mt-5" rowSelection={rowSelection} bordered columns={columns} scroll={{ x: 1600 }} dataSource={props.userList} />
+			<Table className="w-full mt-5" rowSelection={rowSelection} bordered columns={columns} scroll={{x: 1600}} dataSource={props.userList}/>
 		</>
 	);
 };

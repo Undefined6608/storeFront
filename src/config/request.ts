@@ -1,4 +1,4 @@
-import axios, { AxiosPromise, AxiosResponse, InternalAxiosRequestConfig } from "axios";
+import axios, {AxiosPromise, AxiosResponse, InternalAxiosRequestConfig} from "axios";
 import Cookies from "js-cookie";
 
 // 定义请求参数接口
@@ -112,5 +112,5 @@ export function login<T>(url: string, data?: IRequestParams): AxiosPromise<T> {
  * @param token token
  */
 export const loginSuccess = (token: string) => {
-	Cookies.set("token", token, { expires: 1, path: "/" });
+	Cookies.set("token", token, {expires: 1, path: "/"});
 };

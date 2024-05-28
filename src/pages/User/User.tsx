@@ -259,13 +259,13 @@ export const User: React.FC = () => {
 									</Form.Item>
 									<Form.Item className="w-full text-center">
 										<Flex className="items-center justify-around">
-											<Button type="primary" className={"w-1/3"} onClick={handlerModify}>修改</Button>
+											<Button type="primary" className={"flex-1 mr-10 ml-10"} onClick={handlerModify}>修改</Button>
 											{
 												userInfoStatus ?
-													<Button type="default" className={"w-1/3"} onClick={handlerCancel}>取消</Button> :
+													<Button type="default" className={"flex-1 mr-10"} onClick={handlerCancel}>取消</Button> :
 													null
 											}
-											<Button type="default" danger className={"w-1/3"} onClick={handlerLogout}>退出登录</Button>
+											<Button type="default" danger className={"flex-1 mr-10"} onClick={handlerLogout}>退出登录</Button>
 										</Flex>
 									</Form.Item>
 								</Form>

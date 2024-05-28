@@ -5,6 +5,7 @@ import store from "@/store";
 import { AppRouter } from "@/router";
 
 function App() {
+
 	return (
 		<Provider store={store}>
 			<div className="App">

@@ -5,7 +5,7 @@ import { NavComponent } from "./NavComponent/NavComponent";
 import { UserComponent } from "./UserComponent/UserComponent";
 import { useNavigate } from "react-router-dom";
 import { UserBtnList } from "@/components/Header/UserBtnList/UserBtnList";
-import { SearchComponent } from "./SearchComponent/SearchComponent";
+// import { SearchComponent } from "./SearchComponent/SearchComponent";
 export const Header = () => {
 
 	const history = useNavigate();
@@ -21,7 +21,7 @@ export const Header = () => {
 		<div className="header">
 			<div className="title" onClick={() => history("/")}>Co-Store</div>
 			<NavComponent navList={navList.current} />
-			<SearchComponent/>
+			{/*<SearchComponent/>*/}
 			<UserComponent />
 			<UserBtnList />
 		</div>

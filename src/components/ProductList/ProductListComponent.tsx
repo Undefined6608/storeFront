@@ -57,28 +57,28 @@ export const ProductListComponent: React.FC = () => {
 	// 抛出 TSX 组件
 	return (
 		<>
-			<div className={"typeSelect"}>
+			<div className={"w-full mt-3"}>
 				{
 					productType?.productType ?
-						<Segmented
-							className={"select"}
-							options={typeOptions}
-							value={selectOption}
-							onChange={value => typeHandler(value)}
-							block
-						/> :
-						<div className="spin w-full mt-60">
-							<Spin tip="Loading" size="large">
-								<div className="content" />
-							</Spin>
-						</div>
+						<>
+							<Segmented
+								className={"select typeSelect"}
+								options={typeOptions}
+								value={selectOption}
+								onChange={value => typeHandler(value)}
+								block
+							/>
+							{
+								productList?.productList ?
+									<ProductList productList={productList?.productList} /> :
+									<Empty description={"暂无数据"} />
+							}
+						</> :
+						<Spin className="spin w-full mt-60" tip="Loading" size="large">
+							<div className="content" />
+						</Spin>
 				}
 			</div>
-			{
-				productList?.productList ?
-					<ProductList productList={productList?.productList} /> :
-					<Empty description={"暂无数据"} />
-			}
 		</>
 	);
 };
