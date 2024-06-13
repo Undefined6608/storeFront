@@ -4,4 +4,5 @@ craco.config.js
 codeSecurity.ts
 *.json
 api/proxy.js
+output.css
 tailwind.config.js

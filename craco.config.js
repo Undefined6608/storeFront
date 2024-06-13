@@ -14,7 +14,10 @@ module.exports = {
 		},
 		sourcemap: false,
 		// 更改build打包文件名称为dist
-		configure: (webpackConfig, { _, paths }) => {
+		configure: (webpackConfig, { env, paths }) => {
+			if (env === "production") {
+				webpackConfig.devtool = false;
+			}
 			webpackConfig.output.path = path.resolve(__dirname, 'dist')
 			paths.appBuild = path.resolve(__dirname, 'dist')
 			webpackConfig.optimization.minimizer = [
@@ -47,8 +50,8 @@ module.exports = {
 		port: 8001,
 		open: false,
 		proxy: {
-			'/api': {
-				target: 'http://localhost:8005',
+			"/api": {
+				target: "http://localhost:8005",
 				changeOrigin: true
 			}
 		}
